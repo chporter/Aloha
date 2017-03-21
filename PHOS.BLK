@@ -1,0 +1,19 @@
+C=======================================================================
+C  PHOS, Common Block.
+C  Contains common variables for phosphorus.
+C-----------------------------------------------------------------------
+C  REVISION HISTORY
+C  07/17/96 PWW Checked
+C=======================================================================
+
+      REAL    AMTPHO,GPUP,TOTPUP,TPUP
+      REAL    RAPC,VAPC,PLABILE(20),PSTABLE(20),EXTP(20),APFER(25)
+      REAL    STOVP,ROOTP,PSTRES,PDEF2,PDEF3,GRAINP,GRPP,APTPUP
+      REAL    WTPCAN,TRPU,WTPLF,WTPST,WTPSH,WTPUP,PCPL,PCPST,PCPRT
+      REAL    APIRE,APIAC,APIST,PRESIN(20),PACTIV(20),PSTABL(20)
+
+      COMMON /PHOSPHORUS/AMTPHO,RAPC,VAPC,PLABILE,PSTABLE,EXTP,APFER,
+     &        STOVP,ROOTP,PSTRES,PDEF2,PDEF3,GRAINP,GRPP,APTPUP,
+     &        GPUP,TOTPUP,TPUP,WTPCAN,TRPU,WTPLF,WTPST,WTPSH,WTPUP,
+     &        PCPL,PCPST,PCPRT,APIRE,APIAC,APIST,PRESIN,PACTIV,
+     &        PSTABL

@@ -1,0 +1,24 @@
+C=======================================================================
+C  NTRC2, Common Block.
+C  Contains common variables for soil N.
+C-----------------------------------------------------------------------
+C  REVISION HISTORY
+C  07/17/96 PWW Checked
+C=======================================================================
+
+      REAL    TIFON,TIFOM,CNRAT(20)
+      REAL    FPOOL(20,3),OC(20),FON(20),FOM(20),HUM(20),NHUM(20)
+      REAL    CNI(20),WFY(20),TFY(20),PHN(20),ADCOEF(20),TOTN(20)
+      REAL    SNH4(20),SNO3(20),NH4(20),NO3(20),FAC(20),CEC(20)
+      REAL    BD(20),PH(20),UREA(20),UPPM(20),ST(20)
+      REAL    DMINR,WRESR,ANO3,ANH4,FLUX,FLOW,TLCH,TSOC,TSON
+
+      INTEGER MU,IUOF
+      LOGICAL IUON
+
+      COMMON /NMINR/ FOM,FON,OC,DMINR,NHUM,HUM,TIFOM,TIFON,FPOOL,CNRAT
+      COMMON /NITRF/ CNI,WFY,TFY,PHN,TSON,TSOC
+      COMMON /NSPOOL/SNH4,SNO3,NH4,NO3,FAC,BD,PH,UREA,UPPM,TOTN,CEC
+      COMMON /NSTEMP/ST
+      COMMON /NSNIT/ WRESR,ANO3,ANH4
+      COMMON /NMOVE/ FLUX(20),FLOW(20),MU,TLCH,IUON,IUOF,ADCOEF

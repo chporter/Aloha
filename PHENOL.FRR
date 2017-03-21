@@ -1,0 +1,434 @@
+C********** SUBROUTINE TO CALCULATE PHENOLOGICAL STAGE *************
+C The phenological stages are not defined as clear as maize.  They are defined
+C on the purpose of facilitating calculation of leaf production, biomass
+c partitioning, fruit development.  Assumptions are therefore made for each
+c stage accordingly.
+C
+      SUBROUTINE PHENOL(iret)   ! Iret is a parameter determining the end of cycles of crop
+$Include: 'pine1.blk'                        
+$Include: 'pine2.Blk'                        
+$Include: 'pine3.Blk'                        
+$Include: 'pine4.Blk'                        
+$Include: 'Ntrc1.Blk'                        
+$Include: 'Ntrc2.Blk'                        
+$Include: 'Predob.Blk'                       
+$Include: 'Comibs.Blk'                       
+$NOTRUNCATE
+      Character*29 String(5)            ! Define string that will be used 
+      DATA STRING/                      !  for output file latter 
+     1 'EMERG-END 0 STEM GROWTH',       ! Zero stem growth means no net 
+     2 'END ZSG to FORCING',            ! stem growth (in short ZSG)
+     3 'FORCING to SCY',                ! Fruitlet initiation 
+     4 'SCY to 1ST OPEN FLOWER',        ! First open flower
+     5 'FRUIT ENLARGEMENT '/            ! fruit growth
+      xanc=tanc*100.0                   ! Top actual N concentration 
+C                                         (g N/g Dry weight)
+      SDEPTH=5.0
+      aptnup=stovn*10*plants
+      iret=0                            ! Beginning of the crop cycle
+      DTT=TEMPM-TBASE  ! DTT stands for Growing degree days. TEMPM is mean
+c                        air temperature.  TBASE is base temperature below 
+c                        which plant will not grow. 
+C    Next section is the computation of growing degree days.
+c 
+      IF (ISTAGE.GE.4.AND.ISTAGE.LT.7) GO TO 150
+      IF (TEMPMN.GT.TBASE.AND.TEMPMX.LT.35.) GO TO 180
+      IF (TEMPMX.LT.TBASE) DTT=0.0
+      IF (DTT.EQ.0.0) GO TO 200
+      DTT=0.0                                           ! Initialize DTT=0.0
+      DO 100 I=1,8
+           TTMP=TEMPMN+TMFAC(I)*(TEMPMX-TEMPMN)
+           IF (TTMP.GT.TBASE.AND.TTMP.LE.35.) DTT=DTT+(TTMP-TBASE)/8.0
+           IF (TTMP.GT.35.AND.TTMP.LT.45.) DTT=DTT+(35.-TBASE)
+     1    *(1.-(TTMP-35.)/10.)/8.  
+  100 CONTINUE
+      GO TO 200
+  150 CONTINUE
+      IF (TEMPMX.LT.TBASE) DTT=0.0
+      IF (DTT.EQ.0.0) GO TO 200
+C Correcting fruit temperature and higher temperature effect
+C
+      IF (TEMPMX.GT.18.0.AND.TEMPMX.LT.33.0) THEN
+         TEMPFMX=4.32*EXP(0.078*TEMPMX)
+        ELSEIF (TEMPMX.GE.33.0.AND.TEMPMX.LT.50.0) THEN
+             TEMPFMX=TEMPMX*(1.715-(TEMPMX-33.0)/35.0)
+           ELSEIF (TEMPMX.GE.50.0) THEN
+                  TEMPFMX=62.0 
+             ELSE
+                  TEMPFMX=TEMPMX
+         ENDIF
+      IF (TEMPMN.GT.TBASE.AND.TEMPFMX.LT.42.0) GO TO 160
+      IF (TEMPFMX.LT.TBASE) DTT=0.0
+      IF (DTT.EQ.0.0) GO TO 200
+         DTT=0.0
+         DO 155 I=1,8
+         TTMP=TEMPMN+TMFAC(I)*(TEMPFMX-TEMPMN)
+         IF (TTMP.GT.TBASE.AND.TTMP.LE.42.0) THEN
+            DTT=DTT+(TTMP-TBASE)/8.0
+         ELSEIF (TTMP.GT.42.0.AND.TTMP.LT.62.0) THEN
+       DTT=DTT+(42.0-TBASE)*(1.0-((TTMP-42.0)/(62.0-42.0)))/8.
+         ELSE
+             DTT=DTT
+         ENDIF
+ 155    CONTINUE
+       GO TO 200
+ 160   CONTINUE
+       IF (LAT.LT.21.0.and.LAT.GT.-21.0) THEN
+       TEMPFM=0.6*TEMPMN+0.4*TEMPFMX
+       ELSE
+          TEMPFM=(TEMPFMX+TEMPMN)/2
+        ENDIF
+        DTT=TEMPFM-TBASE
+        GO TO 200
+ 180   CONTINUE
+       IF (LAT.LT.21.0.and.LAT.GT.-21.0) THEN
+       TEMPM=0.6*TEMPMN+0.4*TEMPMX
+       ELSE
+          TEMPM=(TEMPMX+TEMPMN)/2
+        ENDIF
+        DTT=TEMPM-TBASE
+  200 Continue
+      SUMDTT=SUMDTT+DTT  ! SUMDTT stands for Cummulative growing degree days
+c                          for each stage starting from first new leaf emerged
+      GO TO (1350,1400,1600,1800,2000,2400,300,800,1200), ISTAGE ! stages
+C
+C********** DETERMINE PLANTING DATE **********************************
+c
+  300 CALL CALDAT  ! call subroutine to convert day of the year to calendar
+c                    date
+  400 FORMAT(1X,I2,1x,a3,F7.0,' PLANTING',15X,F6.0,1X,F5.2,1X,F5.1,
+     1       2X,F4.2,3(1X,F5.0))
+  500 FORMAT(/,'  DATE   CDTT  PHENOLOGICAL STAGE      BIOM    LAI',
+     1       ' NUPTK   N%   CET  RAIN  PESW')
+  550 FORMAT(/,'        c-day                           G/M^2      ',
+     1       ' kg/ha        ---mm----   cm ')
+      IF(IPHOUT)WRITE (*,500)
+      IF(IPHOUT)WRITE (*,550)
+      IF(IPHOUT)Write (Nout1,500)
+      IF(IPHOUT)WRITE (NOUT1,550)
+      IF(IPHOUT)WRITE (*,400) nd,month,cumdtt,Biomas,Lai,Aptnup,
+     1                        Xanc,Cet,CRAIN,PESW
+      IF(IPHOUT)Write(Nout1,400)nd,month,cumdtt,Biomas,Lai,Aptnup,
+     1                          Xanc,Cet,CRAIN,PESW
+      NDAP=0.
+      CALL PHASEI
+      IF (ISWSWB.EQ.0) RETURN  
+      CUMDEP=0.
+      DO 600 L=1,NLAYR
+         CUMDEP=CUMDEP+DLAYR(L)
+         IF (SDEPTH.LT.CUMDEP) GO TO 700
+  600 CONTINUE
+  700 L0=L
+      RETURN
+C
+C********** DETERMINE ROOT INITIATION DATE *****************************
+C  This stage is defined for the purpose of following CERES-MAIZE STRUCTURE
+C  Seed germination.  Actually it does nothing when water balance is off.
+c  NDAP is number of days after planting
+c
+  800 IF (ISWSWB.EQ.0) GO TO 1000
+      IF (SW(L0).GT.LL(L0)) GO TO 1000
+      SWSD=(SW(L0)-LL(L0))*0.65+(SW(L0+1)-LL(L0+1))*0.35
+      NDAP=NDAP+1
+      IF (NDAP.LT.140) GO TO 900
+      ISTAGE=6
+      PLANTS=0.0                 ! PLANTS is plant population density (plants/m^2)
+      GPP=1.                     ! GPP is total fruitlets per fruit
+      FRTWT=0.                   ! Fruit dry weight (g)
+      IF(IPHOUT)WRITE(*,3500)    ! IPHOUT is a logical variable that control
+      IF(IPHOUT)Write(Nout1,3500) ! output.
+      RETURN
+  900 IF (SWSD.LT.0.02) RETURN
+ 1000 CALL CALDAT
+      IF (IPHOUT) WRITE (*,1100)nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                          Xanc,Cet,Crain,Pesw
+      IF (IPHOUT) WRITE (Nout1,1100)nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                              Xanc,Cet,Crain,Pesw
+ 1100 Format(1x,i2,1x,a3,f7.0,' ROOT INITIATION',8x,F6.0,1X,F5.2,
+     1       1X,F5.1,2X,F4.2,3(1X,F5.0))
+      CALL PHASEI                
+      RETURN
+c
+C********** DETERMINE FIRST NEW LEAF EMERGENCE DATE **********************
+c  First new leaf is not the first growing leaf because crown leaves continue
+c  elongation.  The first new leaf is the first new leaf emerged after planting.  
+c  The first new leaf is the starting point to calculate the 
+c  number of leaves emergence and leaf production.  Since no data in the 
+c literature indicates that how long it will take for the first leaf to emerge
+c we assume that air temperature is a dominant factor under no water
+c stress.  The number of days (or growing degree days) since root initiation could be as
+c a index or parameter to determine the first new leaf emergence date (P6 is
+c used here for the purpose)
+c 
+ 1200 RTDEP=RTDEP+0.01*DTT ! depth of root is a function of DTT. 
+      NDAP=NDAP+1
+      IF (NDAP.LT.P6) RETURN  ! P6: NDAP from root initiation
+c                                     to first leaf emerged
+      CALL CALDAT                ! Call CALDAT to record date of the event
+      IF(IPHOUT)WRITE (*,1300)nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                        Xanc,Cet,Crain,Pesw
+      IF(IPHOUT)WRITE(nout1,1300)nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                           Xanc,Cet,Crain,Pesw
+ 1300 Format(1x,i2,1x,a3,f7.0,' LEAF EMERGENCE',9x,F6.0,1X,F5.2,
+     1       1X,F5.1,2X,F4.2,3(1X,F5.0))
+      CALL PHASEI  ! Update the appropriate development-related variables
+c
+      RETURN
+c
+C********** DETERMINE END OF ZERO NET STEM GROWTH *********
+C  This stage is defined for the purpose of calculating stem growth.  Stem
+c  comes with the plant material (crown).  In early stage, stem growth equals
+c  loss for respiration for maintenance.  The net growth is zero.  The stem growth since
+c  the end of net zero stem growth is more related to leaf numbers than to 
+c  leaf weight.  How to determine the end of zero net stem growth is unknown.
+c  The number of days (or growing degree days) since first leaf emergence is assumed to
+c  an index or parameter to determine it (P1 is used here for the purpose).
+c
+ 1350 XSTAGE=SUMDTT/P1     !used in Maize nitrogen model.
+      NDAP=NDAP+1
+      IF (NDAP.LT.(P1+P6)) RETURN !P1: NDAP from leaf emerged to end stem growth
+      CALL CALDAT
+      IF(IPHOUT)WRITE(*,1360)nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                       Xanc,Cet,CRAIN,PESW
+      IF(IPHOUT)WRITE(Nout1,1360)nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                           Xanc,Cet,CRAIN,PESW
+1360  FORMAT(1x,i2,1x,a3,f7.0,' ZERO STEM GROWTH',7X,f6.0,1x,f5.2,
+     1       1x,f5.1,2x,f4.2,3(1x,f5.0))
+      CALL PHASEI   ! Update the appropriate development-related variables
+      RETURN
+c
+C********** DETERMINE PLANT FORCING DATE ************************
+C  Natural flowering of pineapple is triggered not only by daylenght but
+c  also by air temperature, water stress, nitrogen content of the plant, etc.
+c  So it occured very ununiformly.  Fortunely, pineapple can be forced to
+c  flower by chemicals.  Because data in literature indicated that total 
+c  plant weight at the time of forcing is related to fruit yield.  Both 
+c  plant size and number of days after planting are used to determine
+c  the time of focing.  
+c
+1400  NDAP=NDAP+1
+      IF (NFORCING.LT.2) GOTO 1425
+C
+C     Forcing by NUMBER OF DAYS AFTER PLANTING
+C
+      IF (NDAP.LT.NDOF) RETURN
+      PlantSize=TotalPlantWT
+      GOTO 1450
+C
+C     Forcing by Plant Size (200 TO 350 GRAMS USUALLY)
+C
+1425  IF (TotalPlantWT.LT.PlantSize) RETURN
+1450  CALL CALDAT
+C
+      ISDATE=DOY   ! Record forcing date.  
+      FBIOM=biomas ! Record biomass at forcing for OUT5
+      IGFD = NDAP  ! Record days from planting to forcing
+      IF(IPHOUT)WRITE (*,1500)nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                        Xanc,Cet,CRAIN,PESW
+      IF(IPHOUT)WRITE (Nout1,1500)nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                            Xanc,Cet,CRAIN,PESW
+ 1500 Format(1x,i2,1x,a3,f7.0,' FORCING',16X,f6.0,1x,f5.2,1x,f5.1,
+     1       2x,f4.2,3(1x,f5.0))
+      GO TO 2600
+c
+C**** DETERMINE END OF LEAF GROWTH AND DATE OF FRUITLET INITIATION **********
+c Definition of stages from forcing to maturity and the determination
+c of the stages are adopted from Fleish and Bartholomew's heat unit model
+c (1988).  
+c
+C 1600 XSTAGE=1.0+0.5*SIND
+C      DEC=0.4093*SIN(0.0172*(DOY-82.2))
+C      DLV=(-S1*SIN(DEC)-0.1047)/(C1*COS(DEC))
+C      IF (DLV.LT.-.87) DLV=-.87         ! Those statements in comment block
+C      HRLT=7.639*ACOS(DLV)              ! are used by CERES_MAIZE, not used
+C      IF (HRLT.LT.12.5) HRLT=12.5       ! here.
+C      RATEIN=1./(4.+P2*(HRLT-12.5))
+C      SIND=SIND+RATEIN
+C      IF (SIND.LT.1.0) RETURN
+ 1600 IF (SUMDTT.LT.P2) RETURN ! P2: GDD needed to complete this stage
+      CALL CALDAT
+      MAXLAI=LAI               !MaxLAI = LAI at the end of the stage
+c      ABIOMS=BIOMAS            !Above biomass per square meter (g/m^2)
+      PHOTOSYNEYE=SUMP*1000./IDURP     ! Average photosysnthesis rate of
+C                                           ! fruit eye 
+       GPP=G2*(PHOTOSYNEYE/12000+0.43)
+     1       *(0.7+0.3*PlantSize/550.)
+      IF (GPP.GT.G2) GPP=G2         ! G2 is genetic coefficient for potential
+                                    ! eye number
+      IF (GPP.LT.0.0) GPP=0.0
+      FRUITS=PLANTS*(1.-0.10*PLANTS/14.0)  ! number of fruits=plants/m2*FRUITING%
+      IF(IPHOUT)WRITE (*,1700) nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                         Xanc,Cet,CRAIN,PESW
+      IF(IPHOUT)WRITE (nout1,1700)nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                            Xanc, Cet,CRAIN,PESW
+ 1700 Format(1x,i2,1x,a3,f7.0,' SCY',20X,f6.0,1x,f5.2,
+     1       1x,f5.1,2x,f4.2,3(1x,f5.0))
+      GO TO 2600
+c
+C********** DETERMINE DATE OF FIRST OPEN FLOWER ***************
+c The determination is adopted from Fleish and Bartholomew (1988)
+c P3 is the total growing degree days since SCY needed to complete this stage
+c
+ 1800 XSTAGE=1.5+3.0*SUMDTT/P3  ! Used by CERES-MAIZE
+      IF (SUMDTT.LT.P3) RETURN  !P3: GDD needed to complete this stage
+      CALL CALDAT
+      IEFDATE=DOY     !early flowering date=day of year
+      IF(IPHOUT)WRITE (*,1900)nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                        Xanc,Cet,CRAIN,PESW
+      IF(IPHOUT)WRITE (nout1,1900) nd,month,Cumdtt,Biomas,Lai,
+     1                            Aptnup,Xanc, Cet,CRAIN,PESW
+ 1900 Format(1x,i2,1x,a3,f7.0,' EARLY FLOWERING',8X,F6.0,1X,F5.2,
+     1       1X,F5.1,2X,F4.2,3(1X,F5.0))
+      GO TO 2600
+c
+C********** DETERMINE FRUIT HARVEST DATE ********************
+c  Fruit harvest date is defined as 50 % of fruits have exceeded shell color 3.  
+c  It is the beginning of fruit harvest.  It is determined by a coefficient P4 
+c  which is the total growing degree days from first open flower.  Fruit development
+c  rate is corrected by plant population density. 
+c
+ 2000 XSTAGE=4.5+5.5*SUMDTT/(P4*.8)  
+      IF (SWMAX.GT.0.0) GO TO 2050
+      IF (XSTAGE.GE.10.0) THEN
+       SWMAX=STMWT
+       SWMIN=0.65*SWMAX
+      ENDIF
+ 2050 IF (SUMDTT.LT.(P4+(PLANTS-8.0)*2.4*16.95)) RETURN  !P4: GDD needed to complete this stage
+      CALL CALDAT                                    
+      MDATE=DOY   ! Fruit harvest date
+      YIELD=FRTWT*10.*FRUITS   !  fruit dry weight yield (kg/ha)
+      If(Plants.eq.0.) goto 2600
+      IF (GPP.GT.0.) EYEWT=FRTWT/GPP
+      PEYEWT=EYEWT*1000.       ! Eye weight (mg/eye)
+      GPSM=GPP*FRUITS          ! Number of eyes per square meter
+      STOVER=BIOMAS*10.-YIELD  ! Total plant weight except fruit
+      YIELD=YIELD/FDMC         ! Fresh fruit yield (kg/ha)
+      YIELDB=YIELD/0.8914      ! Fresh fruit yield (lb/acre)
+      IF(IPHOUT)WRITE (*,2200)  nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                          Xanc,Cet,CRAIN,PESW
+      IF(IPHOUT)WRITE (nout1,2200)nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                            Xanc,Cet,CRAIN,PESW
+ 2200 Format(1x,i2,1x,a3,f7.0,' FRUIT HARVEST ',9X,F6.0,
+     1       1X,F5.2,1X,F5.1,2X,F4.2,3(1X,F5.0))
+       GO TO 2600
+c
+c*************** DETERMINE FRUIT PHYSIOLOGICAL MATURITY ***********************
+C Fruit physiological maturity is defined as 90% of fruits have been harvested.
+c It is determined by P5, which is cumulative DTT from fruit harvest to physilological
+c maturity. Fruit maturity is influenced by plant population density (Zhang, 1991, Chapter 4).
+
+ 2400 XSTAGE=4.5+5.5*SUMDTT/P5
+      IF(SUMDTT.LT.(P5+P4)) RETURN
+      CALL CALDAT
+      PMDATE=DOY               ! physiological maturity date
+      HBiom=Biomas ! Record biomass at fruit harvest date
+      IF(IPHOUT)WRITE (*,2500)  nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                          Xanc,Cet,CRAIN,PESW
+      IF(IPHOUT)WRITE (nout1,2500)nd,month,Cumdtt,Biomas,Lai,Aptnup,
+     1                            Xanc,Cet,CRAIN,PESW
+ 2500 Format(1x,i2,1x,a3,f7.0,' PH. MATURITY ',10X,F6.0,
+     1       1X,F5.2,1X,F5.1,2X,F4.2,3(1X,F5.0))
+
+      IF(iswnit.ne.0)then
+         IF(frtWT.GT.0.0)THEN
+            XGNP=(GRAINN/frtWT)*100.0
+            XPTN=XGNP*6.25
+            GNUP=GRAINN*FRUITS*10.
+         ENDIF
+         TOTNUP=GNUP+APTNUP
+      Endif
+c
+      IF (ISLKJD.EQ.0) PLSEMS=0.0
+      IF (ISLKJD.NE.0) PLSEMS=ISLKJD-ISOW
+      IF (PLSEMS.LT.0) PLSEMS=365.-ISOW+ISDATE
+      PLSEPR=ISDATE-ISOW
+      IF (PLSEPR.LT.0) PLSEPR=365.-ISOW+ISLKJD
+      IF (MATJD.EQ.0.OR.ISLKJD.EQ.0) SEMTMS=0.0
+      IF (MATJD.NE.0.AND.ISLKJD.NE.0) SEMTMS=MATJD-ISLKJD
+      IF (SEMTMS.LT.0) SEMTMS=365.-ISDATE+MDATE
+      SEMTPR=MDATE-ISDATE
+      IF (SEMTPR.LT.0) SEMTPR=365.-ISLKJD+MATJD
+c
+ 2600 If(iswswb.eq.0) then
+         SI1(ISTAGE)=0.0
+         SI2(ISTAGE)=0.0
+      Else
+         SI1(ISTAGE)=CSD1/ICSDUR
+         SI2(ISTAGE)=CSD2/ICSDUR
+      Endif
+      If(iswnit.eq.0)Then
+         Si3(istage)=0.0
+         Si4(istage)=0.0
+      Else
+         SI3(ISTAGE)=CNSD1/ICSDUR
+         SI4(ISTAGE)=CNSD2/ICSDUR
+      Endif
+      IF (ISTAGE.Eq.6) GO TO 2700
+      CALL PHASEI
+      RETURN
+c
+ 2700 IF(IPHOUT)Write(*,3700)yield,yieldb,GPSM,PEYEWT
+      IF(IPHOUT)Write(nout1,3700)yield,yieldb,GPSM,PEYEWT
+      IF(IPHOUT)WRITE (*,3800)
+      IF(IPHOUT)Write(nout1,3800)
+      DO 2800 I=1,5
+         IF(IPHOUT)WRITE (*,3900) I,SI1(I),SI2(I),SI3(I),SI4(I),
+     1                            STRING(I)
+         IF(IPHOUT)WRITE (nout1,3900) I,SI1(I),SI2(I),SI3(I),SI4(I),
+     1                                STRING(I)
+ 2800 CONTINUE
+      IF(IPHOUT)Write(*,4000)
+      IF(IPHOUT)Write(nout1,4000)
+      IF(.NOT.RUNALL.and.IPHOUT) THEN
+         Write(*,*) ' Press "ENTER" to continue.'
+         Read(5,'(A1)') a
+      ENDIF
+      IF(IPHOUT)Call Clear
+      if(iirr.eq.2.or.iirr.eq.3)then
+         IF(IPHOUT) write(*,2900)nirr,effirr
+ 2900    format(/,i6,' IRRIGATION APPLICATIONS AT ',F5.2,
+     1          ' EFFICIENCY',/)
+         LINES=NIRR/14
+         IF(LINES*14.LT.NIRR)LINES=LINES+1
+         DO 3000 I=1,LINES
+            I1=14*(I-1)+1
+            I2=I1+13
+            IF(I2.GT.NIRR)I2=Nirr
+            IF(IPHOUT)WRITE(NOUT1,3100)(Iday(MPX),MPX=I1,I2)
+            IF(IPHOUT)WRITE(NOUT1,3200)(AIRR(MPX),MPX=I1,I2)
+            IF(IPHOUT)WRITE(*,3100)(Iday(MPX),MPX=I1,I2)
+            IF(IPHOUT)WRITE(*,3200)(AIRR(MPX),MPX=I1,I2)
+ 3000    CONTINUE
+ 3100    FORMAT(1X,'DAY OF YR ',14(I3,2X))
+ 3200    FORMAT(1X,'AMOUNT mm ',14(F4.0,1X))
+         totir=0.0
+         do 3300 i=1,nirr
+            totir=totir+airr(i)
+ 3300    Continue
+         IF(IPHOUT)WRITE(NOUT1,3400)TOTIR
+         IF(IPHOUT)WRITE(*,3400)TOTIR
+ 3400    FORMAT(/1X,'IRRIGATION THIS SEASON : ',F5.0,' mm')
+      endif
+      IF(.not.IMULTI) then
+         CALL OPHARV
+      ELSE
+         CALL FOUT5
+      ENDIF
+      CALL PHASEI
+      iret=1
+c
+      RETURN
+C                MODIF ERIC
+ 3500 FORMAT(1X,'CROP FAILURE BECAUSE OF LACK OF ROOT INITIATION',
+     1       ' WITHIN 140 DAYS OF PLANTING')
+c 3600 FORMAT (' SEED PROBABLY RAN OUT OF METABOLITE DUE TO DEEP PLANTING
+ 3700 Format(/,1x,'YIELD (KG/HA)=',F8.0,1X,'(LB/A)=',F9.1,1X,
+     1       'EYEPSM=',F6.0,1X,'EYE WT.(mg)=',f8.1)
+ 3800 FORMAT (/,1X,'ISTAGE',6X,'CSD1',6X,'CSD2',5X,'CNSD1',5X,
+     1        'CNSD2',2X,' S T A G E  OF  G R O W T H ')
+ 3900 FORMAT (1X,I6,4F10.2,3X,A35)
+ 4000 Format(' * NOTE: In the above table, 0.0 represents minimum',
+     1/,'    stress and 1.0 represents maximum stress for water (CSD)',
+     2/,'    and nitrogen (CNSD), respectively.')
+c
+      END

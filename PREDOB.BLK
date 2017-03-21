@@ -1,0 +1,17 @@
+C=======================================================================
+C  PREDOB, Common Block.
+C  Contains common variables for predicted and observed data.
+C-----------------------------------------------------------------------
+C  REVISION HISTORY
+C  07/17/96 PWW Checked
+C=======================================================================
+
+      INTEGER      ISDATE,MDATE,PMDATE,FHDATE,IANTH,IPHMA
+      REAL         APTNUP,YIELD,MAXLAI,STOVER,XGNP,TOTNUP,GNUP,SKERWT,
+     +             PGRNWT,CLAI,CGPE,XYIELD,XGRWT,XGPSM,XGPE,XLAI,XBIOM,
+     +             XSTRAW,GRPCTN,XTOTNP,XAPTNP,XGNUP
+
+      COMMON /PRED/APTNUP,YIELD,ISDATE,MDATE,PMDATE,MAXLAI,STOVER,XGNP,
+     +             TOTNUP,GNUP,SKERWT,PGRNWT,CLAI,CGPE,FHDATE
+      COMMON /OBS/ XYIELD,XGRWT,XGPSM,XGPE,XLAI,XBIOM,XSTRAW,IANTH,
+     +             IPHMA,GRPCTN,XTOTNP,XAPTNP,XGNUP

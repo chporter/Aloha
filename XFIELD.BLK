@@ -1,0 +1,15 @@
+C=======================================================================
+C  XFIELD, Common Block.
+C  Contains common variables for tabular output.
+C-----------------------------------------------------------------------
+C  REVISION HISTORY
+C  07/17/96 PWW Checked
+C=======================================================================
+
+      CHARACTER*6  XPDW,XGWT,XTHR,XGWU,XNOGR,XNOGU,XLAM,XCWT,XSWT,XHIN,
+     &             XNPS,XNTP,XNST,XNGR,XCWAA,XCNAA,XLFNO
+      INTEGER      IFLR,IFSD,IFPD,IMAT
+
+      COMMON /XFIELD/ IFLR,IFSD,IFPD,IMAT,XGWT,XPDW,
+     &                XNOGR,XGWU,XNOGU,XCWT,XSWT,XLAM,XLFNO,
+     &                XHIN,XNGR,XTHR,XNTP,XNST,XNPS,XCWAA,XCNAA

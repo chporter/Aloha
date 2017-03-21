@@ -1,0 +1,20 @@
+C=======================================================================
+C  GEN2, Common Block.
+C  Contains common variables for genetics.
+C-----------------------------------------------------------------------
+C  REVISION HISTORY
+C  07/17/96 PWW Checked
+C=======================================================================
+
+      REAL           P2,P3,P4,P5,G2,G3,CUMDTT,TBASE,SUMDTT,S1,C1,DTT,
+     +               SIND,CUMPH,DF,HI
+      REAL           CC,TBASE1,CMF,FDMC,RLWR
+      REAL           CO2X(10),CO2Y(10)
+      INTEGER        ISTAGE,IDUR1,P1,P6
+
+      COMMON /GENET/ P1,P2,P3,P4,P5,P6,G2,G3
+      COMMON /PHENL/ CUMDTT,TBASE,SUMDTT,S1,C1,ISTAGE,
+     +               DTT,SIND,CUMPH,IDUR1,DF
+      COMMON /PINE/  CC,TBASE1,CMF,FDMC,RLWR
+      COMMON /COLDC/ HI
+      COMMON /CO2R / CO2X,CO2Y

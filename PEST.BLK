@@ -1,0 +1,16 @@
+C=======================================================================
+C  PEST, Common Block.
+C  Contains common variables for pest.
+C-----------------------------------------------------------------------
+C  REVISION HISTORY
+C  07/17/96 PWW Checked
+C=======================================================================
+
+      CHARACTER*5  PID(40),PCPID(40,6),PSTHD(4)
+      CHARACTER*20 PNAME(40)
+      INTEGER      NPEST,PCTID(40),IDAP(6,100)
+      REAL         PDCF1(40,6),YPL(6,100)
+
+      COMMON /CHARPS/ PID,PCPID,PSTHD,PNAME
+      COMMON /INITPS/ PCTID,NPEST,IDAP
+      COMMON /REALPS/ PDCF1,YPL

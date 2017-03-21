@@ -1,0 +1,16 @@
+C=======================================================================
+C  COWTH, Common Block.
+C  Contains common variables for weather.
+C-----------------------------------------------------------------------
+C  REVISION HISTORY
+C  07/17/96 PWW Checked
+C=======================================================================
+
+      INTEGER NNR(0:20)
+
+      REAL    TMAXR(0:20),TMINR(0:20),RAINR(0:20),DAYLR(0:20)
+      REAL    RADR(0:20), CETR (0:20),TURFR(0:20),RADTR(0:20)
+      REAL    SWFCR(0:20),NSTRR(0:20),AGEFR(0:20)
+
+      COMMON/COWTH/ TMAXR,TMINR,RAINR,DAYLR,RADR,CETR,TURFR,
+     &              NNR,RADTR,SWFCR,NSTRR,AGEFR

@@ -1,0 +1,15 @@
+C=======================================================================
+C  GEN1, Common Block.
+C  Contains common variables for planting.
+C-----------------------------------------------------------------------
+C  REVISION HISTORY
+C  07/17/96 PWW Checked
+C=======================================================================
+
+      INTEGER        DOY,IPLT,ISIM,PMTYPE,NDOF,NFORCING
+      REAL           PLTPOP,SDEPTH,LAT,PHINT,ROWSPC
+      CHARACTER*2    CROP
+
+      COMMON /DATED/ DOY
+      COMMON /PARAM/ IPLT,PLTPOP,SDEPTH,LAT,ISIM,PHINT,ROWSPC,CROP
+      COMMON /ALPIN/ PMTYPE,NDOF,NFORCING
