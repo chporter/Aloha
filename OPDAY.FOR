@@ -74,58 +74,58 @@ C=======================================================================
       PARAMETER (LUNOV  =  6)
 
       DATA GROHEAD(1)/'!YR    Days   Leaf  Grow                      Dry
-     1 Weight                           Pod      Phot. Grow       Leaf
-     2Shell  Spec    Canopy          Root  ³                Root Length
+     1 Weight                           Pod      Phot. Grow       Leaf  
+     2Shell  Spec    Canopy          Root  ³                Root Length 
      3Density                     ³'/
       DATA GROHEAD(2)/'! and  after  Num  Stage  LAI   Leaf  Stem Fruit
-     1 Root Basal Crown  Suck   HI   Wgt.   No.    Water     Nit.  Nit
-     2 -ing  Leaf  Hght  Brdth       Depth ³                cm3/cm3   of
-     3 soil                       ³'/
+     1 Root Basal Crown  Suck   HI   Wgt.   No.    Water     Nit.   Nit 
+     2  -ing  Leaf  Hght Brdth       Depth  ³                cm3/cm3  of
+     3 soil                        ³'/
       DATA GROHEAD(3)/'!  DOY plant                    ³<---------------
-     1 kg/Ha -------------->³       Kg/Ha        ³<Stress (0-1)>³   %
-     2   %   Area   m     m            m   ³<---------------------------
+     1 kg/Ha -------------->³       Kg/Ha        ³<Stress (0-1)>³    %  
+     2   %   Area    m     m           m   ³<---------------------------
      3--------------------------->³'/
-      DATA GROHEAD(4)/'@DATE   CDAY  L#SD  GSTD  LAID  LWAD  SWAD  FWAD
-     1 RWAD  BWAD  CRAD  SUGD  HIAD  EWAD  E#AD  WSPD  WSGD  NSTD  LN%D
-     2 SH%D  SLAD  CHTD  CWID  EWSD  RDPD  RL1D  RL2D  RL3D  RL4D  RL5D
+      DATA GROHEAD(4)/'@DATE   CDAY  L#SD  GSTD  LAID  LWAD  SWAD  FWAD 
+     1 RWAD  BWAD  CRAD  SUGD  HIAD  EWAD  E#AD  WSPD  WSGD  NSTD  LN%D 
+     2 SH%D  SLAD  CHTD  CWID  EWSD  RDPD  RL1D  RL2D  RL3D  RL4D  RL5D 
      3 RL6D  RL7D  RL8D  RL9D  RL10'/
 
       DATA WATHEAD(1)/'!YR     Days  Daily Evapotran.  PESW       Cumula
-     1tive         Ave   Temp. Temp  Day   Day   Cumu. Evap.        No.
-     2                          Soil water in Layer
-     3                  Soil Temperature in Layer'/
+     1tive          Ave  Temp. Temp   Day   Day  Cumu. Evap.        No.
+     2                          Soil water in Layer                     
+     3                    Soil Temperature in Layer'/
       DATA WATHEAD(2)/'! and   after Plant Total Pot.       RunOff Drain
-     1 Prcip Irr   Sol   Max   Min   Len   Soil Plant Soil  Total    of
-     2         1     2     3     4     5     6     7     8     9    10
-     3   1     2     3     4     5     6     7     8     9    10'/
+     1 Prcip Irr    Sol   Max   Min   Len  Soil Plant  Soil  Total   of
+     2          1     2     3     4     5     6     7     8     9    10
+     3     1     2     3     4     5     6     7     8     9    10'/
       DATA WATHEAD(3)/'!  DOY  Plant ³<---- mm ---->³   mm  ³<--------mm
-     1--------->³MJ/m2   C     C      hr   Evap ³<------mm----->³   irr
+     1--------->³ MJ/m2    C     C     hr  Evap ³<------mm----->³   irr 
      2      ³<----------------------- cm3/cm3 ----------------------->³ 
      3³<-------------------------- C -------------------------->³'/
-      DATA WATHEAD(4)/'@DATE   CDAY  EPAA  ETAA  EOAA  SWXD  ROFC  DRNC
-     1 PREC  IRRC  SRAA  TMXA  TMNA  DAYD  ESAA  EPAC  ESAC  ETAC  IR#C
-     2 DTWT  SW1D  SW2D  SW3D  SW4D  SW5D  SW6D  SW7D  SW8D  SW9D  SW10
+      DATA WATHEAD(4)/'@DATE   CDAY  EPAA  ETAA  EOAA  SWXD  ROFC  DRNC 
+     1 PREC  IRRC  SRAA  TMXA  TMNA  DAYD  ESAA  EPAC  ESAC  ETAC  IR#C 
+     2 DTWT  SW1D  SW2D  SW3D  SW4D  SW5D  SW6D  SW7D  SW8D  SW9D  SW10 
      3 TS1D  TS2D  TS3D  TS4D  TS5D  TS6D  TS7D  TS8D  TS9D  TS10'/
 
       DATA NITHEAD(1)/'!YR     Days      Nitrogen      Nitrogen    Inorg
-     1  Fix  Up-  leach  Soil  Soil  Leaf  Stem  Leaf  Stem  Shell Root
+     1  Fix  Up-  leach  Soil  Soil  Leaf  Stem  Leaf  Stem  Shell Root 
      2 Nfix  Total Soil  ³<------------- Nitrate for Soil Layer --------
      3--------->³  ³<--------------- Ammonium for Soil Layer -----------
      4--->³'/
       DATA NITHEAD(2)/'! and   After Crop  Grain Veg. Grain  Veg.  N Fer
-     1t      take       Inorg   Org    N     N     N     N     N     N
-     2 Rate   NO3   NH4    1     2     3     4     5     6     7     8
-     3   9    10     1     2     3     4     5     6     7     8     9
+     1t      take       Inorg   Org    N     N     N     N     N     N  
+     2 Rate   NO3   NH4    1     2     3     4     5     6     7     8  
+     3   9    10     1     2     3     4     5     6     7     8     9  
      4  10'/
       DATA NITHEAD(3)/'!  DOY  Plant ³<--- Kg/Ha -->³ ³<-- % -->³  ³<---
      1--------- kg/ha ----------->³  ³<-kg/ha->³ ³<-------- % ------->³k
      2g/ha/d ³<-kg/ha->³ ³<---------------------------------------------
      3------- ug N/g soil ----------------------------------------------
      4--->³'/
-      DATA NITHEAD(4)/'@DATE   CDAY  CNAD  GNAD  VNAD  GN%D  VN%D  NAPC
-     1 NFXC  NUPC  NLCC  NIAD  NOAD  LNAD  SNAD  LN%D  SN%D  SHND  RN%D
-     2 NFXD  NITD  NHTD  NI1D  NI2D  NI3D  NI4D  NI5D  NI6D  NI7D  NI8D
-     3 NI9D  NI10  NH1D  NH2D  NH3D  NH4D  NH5D  NH6D  NH7D  NH8D  NH9D
+      DATA NITHEAD(4)/'@DATE   CDAY  CNAD  GNAD  VNAD  GN%D  VN%D  NAPC 
+     1 NFXC  NUPC  NLCC  NIAD  NOAD  LNAD  SNAD  LN%D  SN%D  SHND  RN%D 
+     2 NFXD  NITD  NHTD  NI1D  NI2D  NI3D  NI4D  NI5D  NI6D  NI7D  NI8D 
+     3 NI9D  NI10  NH1D  NH2D  NH3D  NH4D  NH5D  NH6D  NH7D  NH8D  NH9D 
      4 NH10'/
 
       DATA PHOHEAD(1)/'!YR     Days     Phosphorus    Phosphorus   Inorg
@@ -760,7 +760,7 @@ C-----------------------------------------------------------------------
 C     FORMAT Strings
 C-----------------------------------------------------------------------
 
- 200  FORMAT(1X,I5,1X,I5,3(1X,F5.2,),3(1X,F5.1),2(1X,I5),
+ 200  FORMAT(1X,I5,1X,I5,3(1X,F5.2),3(1X,F5.1),2(1X,I5),
      &    3(1X,F5.1))
  300  FORMAT(1X,I5,1X,I5,3(1X,F5.2),2(1X,F5.1),3(1X,I5),
      &    3(1X,F5.1),2(1X,F5.2),3(1X,F5.1),2(1X,I5),

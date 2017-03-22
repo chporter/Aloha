@@ -94,7 +94,7 @@ C=======================================================================
          WTNFXI = WTNFX
          WTNUPI = WTNUP*10.0
          TALLNI = TSONI+TIFONI+ANO3I+ANH4I+TLCHI+TNOXI+TFERTI+TRESNI+
-     &            SEEDNI*10+WTNUPI
+     &            SEEDNI*10.0+WTNUPI
          YRDOYI = YRDOY
       ENDIF
 
@@ -106,12 +106,12 @@ C=======================================================================
          WTNLF  = WTNLF-WTNLO
 
          TALLN  = TSON+TIFON+ANO3+ANH4+TLCH+TNOX+TFERT+TRESN+
-     &            WTNUP*10.0+WTNLO*10
+     &            WTNUP*10.0+WTNLO*10.0
          WRITE (77,320) YRDOYI,YRDOY
          WRITE (77,400) TSONI,TSON,TIFONI,TIFON,
      &       ANO3I,ANO3,ANH4I,ANH4,TLCHI,TLCH,TNOXI,TNOX,
-     &       TFERTI,TFERT,TRESNI,TRESN,WTNUPI,WTNUP*10,TALLNI,TALLN,
-     &       SEEDNI*10,SEEDNF*10,WTNFXI*10,WTNFX*10
+     &       TFERTI,TFERT,TRESNI,TRESN,WTNUPI,WTNUP*10.0,TALLNI,TALLN,
+     &       SEEDNI*10.0,SEEDNF*10.0,WTNFXI*10.0,WTNFX*10.0
          WRITE (77,500)
          WRITE (77,600)
      &       WTNLF *10.0,WTNLO *10.0,WTNLA *10.0,

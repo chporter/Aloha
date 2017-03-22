@@ -535,7 +535,7 @@ C-----------------------------------------------------------------------
      &   TSEDM,TRON,TOTPST,H2OLOS,SEPLOS,CHMCOD,ISENS)
 
       IF (ISWNIT .EQ. 'Y' .AND. IDETN .EQ. 'Y') THEN
-         CALL NBAL (1,TSON,TIFON,ANO3,ANH4,TLCH,TNOX,WTNUP,YRDOY,
+         CALL NBAL (2,TSON,TIFON,ANO3,ANH4,TLCH,TNOX,WTNUP,YRDOY,
      &                 WTNFX,SEEDNI,NFERT,ANFER,WTNLF,WTNST,WTNSD,WTNSH,
      &                 WTNRT,WTNLO,NRESAP,RESIDUE,RESN)
       ENDIF
