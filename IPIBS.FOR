@@ -356,7 +356,9 @@ C-----------------------------------------------------------------------
          READ (LUNIO,990) DS(I),LL(I),DUL(I),SAT(I),SHF(I),SWCN(I),
      &         BD(I),OC(I),CLAY(I),SILT(I),STONES(I),TOTN(I),PH(I),
      &         PHKCL(I),CEC(I),ADCOEF(I)
-         IF (I .GT. 1 .AND. DS(I) .LT. DS(I-1)) EXIT
+         IF (I .GT. 1) THEN
+           IF (DS(I) .LT. DS(I-1)) EXIT
+         ENDIF
          NLAYR = NLAYR + 1
       END DO
 

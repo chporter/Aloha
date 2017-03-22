@@ -19,7 +19,7 @@ C=======================================================================
 
       CHARACTER*(*) ERRKEY,FILE
       CHARACTER     AKEY*6,BLANK*80,KEY*6,LINE*80
-      CHARACTER*52  PATHX
+      CHARACTER*72  PATHX
       CHARACTER*100 ERRORX
 
       INTEGER       ANUM,ERRNUM,LNUM
