@@ -48,7 +48,7 @@ C  TNLAB  :
 C  TTMP   :
 C=======================================================================
 
-      SUBROUTINE GROSUB (NOUTDO,ISWNIT,IDETO)
+      SUBROUTINE GROSUB (yrdoy, NOUTDO,ISWNIT,IDETO)
 
       IMPLICIT  NONE
 
@@ -59,7 +59,7 @@ C=======================================================================
       INCLUDE  'NTRC1.BLK'
 
       CHARACTER ISWNIT*1,IDETO*1
-      INTEGER   NOUTDO,ICOLD
+      INTEGER   NOUTDO,ICOLD, yrdoy
       REAL      PCARB,PRFT,PC,TI,GRF,RGFILL,GROGRN,SFAC,TFAC,RMNC,XNF,
      &          TNLAB,RNLAB,RNOUT,SLFW,SLFN,SLFC,SLFT,PLAS
       REAL      NSINK,NPOOL1,NPOOL2,NPOOL,NSDR
@@ -77,6 +77,8 @@ C=======================================================================
       !
       PCO2  = TABEX (CO2Y,CO2X,CO2,10)
       PCARB = PCARB*PCO2
+
+      write(5551,'(i7,i5,3f10.4)') yrdoy, istage, pco2, par, y1
 
       TEMPM = 0.6*TMIN + 0.4*TMAX
       SELECT CASE (ISTAGE)
@@ -109,6 +111,9 @@ C=======================================================================
          CARBO = PCARB*AMIN1(PRFT,SWFAC,NSTRES)
       ENDIF
       DTT = AMAX1 (DTT,0.0)
+
+      write(666,'(i7,3f10.4)') yrdoy, pcarb, carbo, prft
+
 
       IF (ISTAGE .LE. 3) THEN
          !

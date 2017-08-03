@@ -284,6 +284,12 @@ C         ABIOMS      = BIOMAS            ! Above biomass per square meter (g/m^
              YIELDB = YIELD/0.8914         ! Fresh fruit yield (lb/acre)
              STGDOY (ISTAGE) = YRDOY
           ENDIF
+
+
+          WRITE(777,'(i7,f10.2)') YRDOY, YIELD
+
+
+
         CASE (6)
           !
           ! Stage 6 >> Physiological maturity

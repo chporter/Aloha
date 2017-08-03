@@ -467,7 +467,7 @@ C----------------------------------------------------------------------
       
          IF (ISTAGE .LT. 6) THEN
             IF (CROP .EQ. 'PI') THEN
-               CALL GROSUB  (NOUTDO,ISWNIT,IDETO)
+               CALL GROSUB  (yrdoy,NOUTDO,ISWNIT,IDETO)
             ENDIF
          ENDIF
 
@@ -483,6 +483,8 @@ C-----------------------------------------------------------------------
          IF (YRDOY .EQ. YRPLT .OR. ISTAGE .NE. 7) THEN
             CALL PHENOL (STGDOY,YRDOY,XLAT)
          ENDIF
+         write(4444,'(i7,i5,2F10.4,F8.2)') 
+     &     yrdoy, istage, DTT, SUMDTT, TBASE
 
 C-----------------------------------------------------------------------
 C        Call AUTHAR to check harvest switch & determine HAREND
@@ -535,7 +537,7 @@ C-----------------------------------------------------------------------
      &   TSEDM,TRON,TOTPST,H2OLOS,SEPLOS,CHMCOD,ISENS)
 
       IF (ISWNIT .EQ. 'Y' .AND. IDETN .EQ. 'Y') THEN
-         CALL NBAL (2,TSON,TIFON,ANO3,ANH4,TLCH,TNOX,WTNUP,YRDOY,
+         CALL NBAL (1,TSON,TIFON,ANO3,ANH4,TLCH,TNOX,WTNUP,YRDOY,
      &                 WTNFX,SEEDNI,NFERT,ANFER,WTNLF,WTNST,WTNSD,WTNSH,
      &                 WTNRT,WTNLO,NRESAP,RESIDUE,RESN)
       ENDIF
