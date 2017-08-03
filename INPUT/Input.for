@@ -250,7 +250,7 @@ C-----------------------------------------------------------------------
 C     Call IPSLIN to read initial soil conditions
 C-----------------------------------------------------------------------
 
-      IF (ISWWAT .NE. 'N' .AND. MESIC .EQ. 'M') THEN
+!      IF (ISWWAT .NE. 'N' .AND. MESIC .EQ. 'M') THEN
          CALL IPSLIN (FILEX,LNIC,NLAYR,DUL,YRIC,PRCROP,WRESR,
      &        WRESND,EFINOC,EFNFIX,PEDON,SLNO,DS,SWINIT,INH4,INO3,
      &        ISWWAT,ISWNIT,ICWD,ICRES,ICREN,ICREP,ICRIP,ICRID)
@@ -270,7 +270,7 @@ C-----------------------------------------------------------------------
          IF (ISWNIT .EQ. 'Y') THEN
             CALL IPSLAN (FILEX,LNSA,BD,OC,PH,PEDON,SLNO,DS,EXTP,TOTN)
          ENDIF
-      ENDIF
+!      ENDIF
 C-----------------------------------------------------------------------
 C        Sensitivity Analysis Section
 C-----------------------------------------------------------------------
