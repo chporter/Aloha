@@ -1328,11 +1328,13 @@ C-----------------------------------------------------------------------
  3050 FORMAT (//,'*SIMULATED CROP AND SOIL STATUS AT MAIN',
      &        ' DEVELOPMENT STAGES',//,' RUN NO. ',I2,4X,A25,/)
  3200 FORMAT (3X,'DATE',1X,'CROP',1X,'GROWTH',3X,
-     &       'BIOMASS',2X,'LAI ',1X,'LEAF',3X,'ET',2X,'RAIN',1X,'IRRIG',
-     &       1X,'SWATER',1X,'CROP  N',2X,'STRESS',/,8X,'AGE',2X,'STAGE',
-     &       5X,'kg/ha',9X,'NUM.',2X,'mm',3X,'mm',4X,'mm',4X,'mm',3X,
-     &       'kg/ha %',1X,' H2O  N',/,80('-'))
+     &       'BIOMASS',2X,'LAI',2X,'LEAF',3X,'ET',2X,'RAIN',1X,'IRRIG',
+     &       1X,'SWATER',2X,'CROP N',3X,'STRESS',
+     &  /,9X,'AGE',1X,'STAGE',
+     &       6X,'kg/ha',8X,'NUM.',2X,'mm',4X,'mm',4X,'mm',4X,'mm',1X,
+     &       'kg/ha  %',2X,'H2O    N',
+     &  /,82('-'))
  4600 FORMAT (1X,I2,1X,A3,2X,I3,1X,A10,I6,1X,F5.2,1X,F4.1,I5,
-     &        3I6,I5,F4.1,2F4.2)
+     &        3I6,I5,F4.1,2F5.2)
 
       END

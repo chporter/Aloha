@@ -461,13 +461,20 @@ C-----------------------------------------------------------------------
      &                   MDATE,IDETO,NOUTDO)
          ENDIF
 
+!================================
+!     chp temp debug
+      nh4 = 1.0
+      no3 = 1.0
+      sw = dul
+!================================
+
 C-----------------------------------------------------------------------
 C        Call GROSUB
 C----------------------------------------------------------------------
       
          IF (ISTAGE .LT. 6) THEN
             IF (CROP .EQ. 'PI') THEN
-               CALL GROSUB  (NOUTDO,ISWNIT,IDETO)
+               CALL GROSUB  (yrdoy,NOUTDO,ISWNIT,IDETO)
             ENDIF
          ENDIF
 
