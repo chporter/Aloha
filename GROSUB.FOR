@@ -67,6 +67,10 @@ C=======================================================================
 
       IF (ISWNIT .NE. 'N' .AND. ISTAGE .LT. 7) THEN
          CALL NFACTO
+
+        write(2345,'(i7,8f8.3)') yrdoy, 
+     &    agefac, ndef3, nfac, nstres, rcnp, tanc, tcnp, tmnc
+
       ENDIF
 
       PAR   = 0.5*SRAD
@@ -633,7 +637,7 @@ C       PLA     = (LFWT+GROLF)**0.87*96.0
      &            BASLFWT+SKWT+STMWT+FLRWT)
       
       IF (ISWNIT .NE. 'N') THEN
-         CALL NUPTAK
+         CALL NUPTAK(yrdoy)
       ENDIF
 
       RETURN

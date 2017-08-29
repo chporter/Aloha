@@ -56,7 +56,8 @@ C  XMIN   :
 C  XNDEM  :
 C=======================================================================
 
-      SUBROUTINE NUPTAK
+!     SUBROUTINE NUPTAK       !chp for debugging
+      SUBROUTINE NUPTAK(yrdoy)
 
       IMPLICIT  NONE
 
@@ -70,6 +71,7 @@ C=======================================================================
       DIMENSION RNO3U(20),RNH4U(20)
 
       INTEGER   L,L1
+      integer   yrdoy
       REAL      RNH4U,RNO3U,TRNLOS,TRLV,DNG,
      +          TNDEM,RNDEM,ANDEM,DROOTN,DSTOVN,FNH4,FNO3,SMDFR,RFAC,
      +          UNO3,UNH4,XMIN,RNLOSS,XNDEM,FACTOR
@@ -96,6 +98,17 @@ C-----------------------------------------------------------------------
          NO3(L)   = SNO3(L) * FAC(L)
          NH4(L)   = SNH4(L) * FAC(L)
       END DO
+
+!================================
+!     chp temp debug
+      nh4 = 1.0
+      no3 = 1.0
+      sw = dul
+      DO L = 1, NLAYR
+         sno3(l)  = no3(l) / fac(l)
+         snh4(l)  = nh4(l) / fac(l)
+      END DO
+!================================
 
 C-----------------------------------------------------------------------
 C     Calculate N demand (DNG=g N/PLT) for new growth (PDWI=g/plt)
