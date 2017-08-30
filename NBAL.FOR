@@ -64,7 +64,8 @@ C=======================================================================
          DO I = 1, NRESAP
             TRESN = TRESN + RESIDUE (I) * RESN(I)/100.0
          END DO
-         OPEN (UNIT=77,FILE='NBAL.OUT',STATUS='UNKNOWN',ACCESS='APPEND')
+         OPEN (UNIT=77,FILE='NBAL.OUT',STATUS='UNKNOWN',
+     &      POSITION='APPEND')
       ENDIF
 
       WTNSH  = 0.0
