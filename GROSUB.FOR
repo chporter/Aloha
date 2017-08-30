@@ -68,9 +68,6 @@ C=======================================================================
       IF (ISWNIT .NE. 'N' .AND. ISTAGE .LT. 7) THEN
          CALL NFACTO
 
-        write(2345,'(i7,8f8.3)') yrdoy, 
-     &    agefac, ndef3, nfac, nstres, rcnp, tanc, tcnp, tmnc
-
       ENDIF
 
       PAR   = 0.5*SRAD
@@ -81,8 +78,6 @@ C=======================================================================
       !
       PCO2  = TABEX (CO2Y,CO2X,CO2,10)
       PCARB = PCARB*PCO2
-
-      write(5551,'(i7,i5,3f10.4)') yrdoy, istage, pco2, par, y1
 
       TEMPM = 0.6*TMIN + 0.4*TMAX
       SELECT CASE (ISTAGE)
@@ -115,9 +110,6 @@ C=======================================================================
          CARBO = PCARB*AMIN1(PRFT,SWFAC,NSTRES)
       ENDIF
       DTT = AMAX1 (DTT,0.0)
-
-      write(666,'(i7,3f10.4)') yrdoy, pcarb, carbo, prft
-
 
       IF (ISTAGE .LE. 3) THEN
          !

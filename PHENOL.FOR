@@ -126,7 +126,6 @@ C=======================================================================
       END SELECT
 
    20 SUMDTT  = SUMDTT  + DTT
-      write(1234,*)sumdtt
 
 C     7 - Preplanting
 C     8 - Planting to root initiation

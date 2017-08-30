@@ -117,7 +117,6 @@ C
             RLV(L) = AMAX1 (RLV(L),0.0)
             RLV(L) = AMIN1 (RLV(L),4.0)
          END DO
-         write(999,'(4f10.4)') (rlv(L),L=1,4)
       ENDIF
 
       RETURN
