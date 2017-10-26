@@ -2,7 +2,7 @@ C=======================================================================
 C   PIALO980, Main program
 C
 C   ALOHA-PINEAPPLE MODEL
-C
+!   Assessment of Local Options for Hawaii Agriculture
 C   August 1997
 C
 C
@@ -483,8 +483,6 @@ C-----------------------------------------------------------------------
          IF (YRDOY .EQ. YRPLT .OR. ISTAGE .NE. 7) THEN
             CALL PHENOL (STGDOY,YRDOY,XLAT)
          ENDIF
-         write(4444,'(i7,i5,2F10.4,F8.2)') 
-     &     yrdoy, istage, DTT, SUMDTT, TBASE
 
 C-----------------------------------------------------------------------
 C        Call AUTHAR to check harvest switch & determine HAREND

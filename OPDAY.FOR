@@ -73,41 +73,41 @@ C=======================================================================
 
       PARAMETER (LUNOV  =  6)
 
-!      DATA GROHEAD(1)/'!YR    Days   Leaf  Grow                      Dry
-!     1 Weight                           Pod      Phot. Grow       Leaf
-!     2Shell  Spec    Canopy          Root  ³                Root Length
-!     3Density                     ³'/
-!      DATA GROHEAD(2)/'! and  after  Num  Stage  LAI   Leaf  Stem Fruit
-!     1 Root Basal Crown  Suck   HI   Wgt.   No.    Water     Nit.  Nit
-!     2 -ing  Leaf  Hght  Brdth       Depth ³                cm3/cm3   of
-!     3 soil                       ³'/
-!      DATA GROHEAD(3)/'!  DOY plant                    ³<---------------
-!     1 kg/Ha -------------->³       Kg/Ha        ³<Stress (0-1)>³   %
-!     2   %   Area   m     m            m   ³<---------------------------
-!     3--------------------------->³'/
-!      DATA GROHEAD(4)/'@DATE   CDAY  L#SD  GSTD  LAID  LWAD  SWAD  FWAD 
-!     1 RWAD  BWAD  CRAD  SUGD  HIAD  EWAD  E#AD  WSPD  WSGD  NSTD  LN%D 
-!     2 SH%D  SLAD  CHTD  CWID  EWSD  RDPD  RL1D  RL2D  RL3D  RL4D  RL5D 
-!     3 RL6D  RL7D  RL8D  RL9D  RL10'/
+      DATA GROHEAD(1)/'!YR    Days   Leaf  Grow                      Dry
+     1 Weight                           Pod      Phot. Grow       Leaf
+     2Shell  Spec    Canopy          Root  ³                Root Length
+     3Density                     ³'/
+      DATA GROHEAD(2)/'! and  after  Num  Stage  LAI   Leaf  Stem Fruit
+     1 Root Basal Crown  Suck   HI   Wgt.   No.    Water     Nit.  Nit
+     2 -ing  Leaf  Hght  Brdth       Depth ³                cm3/cm3   of
+     3 soil                       ³'/
+      DATA GROHEAD(3)/'!  DOY plant                    ³<---------------
+     1 kg/Ha -------------->³       Kg/Ha        ³<Stress (0-1)>³   %
+     2   %   Area   m     m            m   ³<---------------------------
+     3--------------------------->³'/
+      DATA GROHEAD(4)/'@DATE   CDAY  L#SD  GSTD  LAID  LWAD  SWAD  FWAD 
+     1 RWAD  BWAD  CRAD  SUGD  HIAD  EWAD  E#AD  WSPD  WSGD  NSTD  LN%D 
+     2 SH%D  SLAD  CHTD  CWID  EWSD  RDPD  RL1D  RL2D  RL3D  RL4D  RL5D 
+     3 RL6D  RL7D  RL8D  RL9D  RL10'/
 
 
-!     for expanded growth variables:
-      DATA GROHEAD(1)/'!YR    Days   Leaf  Grow                         
-     1 Dry Weight                              Pod      Phot. Grow      
-     2 Leaf  Shell  Spec    Canopy          Root  ³                Root 
-     3Length Density                     ³'/
-      DATA GROHEAD(2)/'! and  after  Num  Stage  LAI    Leaf   Stem  Fru
-     1it   Root  Basal  Crown   Suck   HI   Wgt.   No.    Water     Nit.
-     2   Nit   -ing  Leaf  Hght Brdth       Depth  ³                cm3/
-     3cm3  of soil                        ³'/
-      DATA GROHEAD(3)/'!  DOY plant                     ³<--------------
-     1---  kg/Ha  ---------------->³       Kg/Ha        ³<Stress (0-1)>³
-     2    %     %   Area    m     m           m   ³<--------------------
-     3---------------------------------->³'/
-      DATA GROHEAD(4)/'@DATE   CDAY  L#SD  GSTD  LAID   LWAD   SWAD   FW
-     1AD   RWAD   BWAD   CRAD   SUGD  HIAD  EWAD  E#AD  WSPD  WSGD  
-     2NSTD  LN%D  SH%D  SLAD  CHTD  CWID  EWSD  RDPD  RL1D  RL2D  RL3D  
-     3RL4D  RL5D  RL6D  RL7D  RL8D  RL9D  RL10'/
+!!     for expanded growth variables:
+!      DATA GROHEAD(1)/'!YR    Days   Leaf  Grow                         
+!     1 Dry Weight                              Pod      Phot. Grow      
+!     2 Leaf  Shell  Spec    Canopy          Root  ³                Root 
+!     3Length Density                     ³'/
+!      DATA GROHEAD(2)/'! and  after  Num  Stage  LAI    Leaf   Stem  Fru
+!     1it   Root  Basal  Crown   Suck   HI   Wgt.   No.    Water     Nit.
+!     2   Nit   -ing  Leaf  Hght Brdth       Depth  ³                cm3/
+!     3cm3  of soil                        ³'/
+!      DATA GROHEAD(3)/'!  DOY plant                     ³<--------------
+!     1---  kg/Ha  ---------------->³       Kg/Ha        ³<Stress (0-1)>³
+!     2    %     %   Area    m     m           m   ³<--------------------
+!     3---------------------------------->³'/
+!      DATA GROHEAD(4)/'@DATE   CDAY  L#SD  GSTD  LAID   LWAD   SWAD   FW
+!     1AD   RWAD   BWAD   CRAD   SUGD  HIAD  EWAD  E#AD  WSPD  WSGD  
+!     2NSTD  LN%D  SH%D  SLAD  CHTD  CWID  EWSD  RDPD  RL1D  RL2D  RL3D  
+!     3RL4D  RL5D  RL6D  RL7D  RL8D  RL9D  RL10'/
 
 
       DATA WATHEAD(1)/'!YR     Days  Daily Evapotran.  PESW       Cumula
@@ -123,17 +123,17 @@ C=======================================================================
      2      ³<----------------------- cm3/cm3 ----------------------->³ 
      3³<-------------------------- C -------------------------->³'/
 
-!      DATA WATHEAD(4)/'@DATE   CDAY  EPAA  ETAA  EOAA  SWXD  ROFC  DRNC
-!     1 PREC  IRRC  SRAA  TMXA  TMNA  DAYD  ESAA  EPAC  ESAC  ETAC  IR#C
-!     2 DTWT  SW1D  SW2D  SW3D  SW4D  SW5D  SW6D  SW7D  SW8D  SW9D  SW10
-!     3 TS1D  TS2D  TS3D  TS4D  TS5D  TS6D  TS7D  TS8D  TS9D  TS10'/
+      DATA WATHEAD(4)/'@DATE   CDAY  EPAA  ETAA  EOAA  SWXD  ROFC  DRNC
+     1 PREC  IRRC  SRAA  TMXA  TMNA  DAYD  ESAA  EPAC  ESAC  ETAC  IR#C
+     2 DTWT  SW1D  SW2D  SW3D  SW4D  SW5D  SW6D  SW7D  SW8D  SW9D  SW10
+     3 TS1D  TS2D  TS3D  TS4D  TS5D  TS6D  TS7D  TS8D  TS9D  TS10'/
 
-!     For expanded outputs
-      DATA WATHEAD(4)/'@DATE   CDAY  EPAA  ETAA  EOAA  SWXD  ROFC  DRNC 
-     1 PREC  IRRC  SRAA  TMXA  TMNA  DAYD  ESAA    EPAC    ESAC    ETAC 
-     2 IR#C  DTWT  SW1D  SW2D  SW3D  SW4D  SW5D  SW6D  SW7D  SW8D  SW9D 
-     3 SW10  TS1D  TS2D  TS3D  TS4D  TS5D  TS6D  TS7D  TS8D  TS9D  TS10'
-     4/
+!!     For expanded outputs
+!      DATA WATHEAD(4)/'@DATE   CDAY  EPAA  ETAA  EOAA  SWXD  ROFC  DRNC 
+!     1 PREC  IRRC  SRAA  TMXA  TMNA  DAYD  ESAA    EPAC    ESAC    ETAC 
+!     2 IR#C  DTWT  SW1D  SW2D  SW3D  SW4D  SW5D  SW6D  SW7D  SW8D  SW9D 
+!     3 SW10  TS1D  TS2D  TS3D  TS4D  TS5D  TS6D  TS7D  TS8D  TS9D  TS10'
+!     4/
 
       DATA NITHEAD(1)/'!YR     Days      Nitrogen      Nitrogen    Inorg
      1  Fix  Up-  leach  Soil  Soil  Leaf  Stem  Leaf  Stem  Shell Root 
@@ -710,11 +710,11 @@ C
      &      NINT(SKWT*GM2KG),HI
        ELSE IF (IDETL .EQ. 'Y') THEN
          WRITE (NOUTDG,400) MOD(YRDOY,100000),DAP,VSTAGE,RSTAGE,XLAI,
-!     &      NINT(WTLF*10.0),NINT(STMWT*GM2KG),NINT(FRTWT*GM2KG),
-!     &      NINT(RTWT*GM2KG),NINT(BASLFWT*10.0),NINT(CRWNWT*GM2KG),
-!     &      NINT(SKWT*GM2KG),HI,
-     &      WTLF*10.0,STMWT*GM2KG,FRTWT*GM2KG,RTWT*GM2KG,BASLFWT*10.0,
-     &      CRWNWT*GM2KG,SKWT*GM2KG,HI,
+     &      NINT(WTLF*10.0),NINT(STMWT*GM2KG),NINT(FRTWT*GM2KG),
+     &      NINT(RTWT*GM2KG),NINT(BASLFWT*10.0),NINT(CRWNWT*GM2KG),
+     &      NINT(SKWT*GM2KG),HI,
+!     &      WTLF*10.0,STMWT*GM2KG,FRTWT*GM2KG,RTWT*GM2KG,BASLFWT*10.0,
+!     &      CRWNWT*GM2KG,SKWT*GM2KG,HI,
      &      NINT(PODWT*GM2KG),NINT(PODNO),(1.0-SWFAC),(1.0-TURFAC),
      &      (1.0-NSTRES),PCNL,SHELPC,SLA,CANHT,CANWH,SATFAC,
      &      (RTDEP/100),(RLV(I),I=1,10)
@@ -727,12 +727,12 @@ C     FORMAT Strings
 C-----------------------------------------------------------------------
 
  300  FORMAT (2(1X,I5),1X,F5.1,1X,I5,1X,F5.2,7(1X,I5),1X,F5.3)
-! 400  FORMAT (2(1X,I5),1X,F5.1,1X,I5,1X,F5.2,7(1X,I5),
-!     &        1X,F5.3,2(1X,I5),3(1X,F5.3),2(1X,F5.2),1X,F5.1,
-!     &        2(1X,F5.2),1X,F5.3,11(1X,F5.2))
- 400  FORMAT (2(1X,I5),1X,F5.1,1X,I5,1X,F5.2,7(1X,F6.1),
+ 400  FORMAT (2(1X,I5),1X,F5.1,1X,I5,1X,F5.2,7(1X,I5),
      &        1X,F5.3,2(1X,I5),3(1X,F5.3),2(1X,F5.2),1X,F5.1,
-     &        2(1X,F5.2),1X,F5.3,F6.3,10(1X,F5.2))
+     &        2(1X,F5.2),1X,F5.3,11(1X,F5.2))
+! 400  FORMAT (2(1X,I5),1X,F5.1,1X,I5,1X,F5.2,7(1X,F6.1),
+!     &        1X,F5.3,2(1X,I5),3(1X,F5.3),2(1X,F5.2),1X,F5.1,
+!     &        2(1X,F5.2),1X,F5.3,F6.3,10(1X,F5.2))
 
       END
 
@@ -796,8 +796,8 @@ C-----------------------------------------------------------------------
  200  FORMAT(1X,I5,1X,I5,3(1X,F5.2),3(1X,F5.1),2(1X,I5),
      &    3(1X,F5.1))
  300  FORMAT(1X,I5,1X,I5,3(1X,F5.2),2(1X,F5.1),3(1X,I5),
-     &    3(1X,F5.1),2(1X,F5.2),3(1X,F7.1),2(1X,I5),
-!     &    3(1X,F5.1),2(1X,F5.2),3(1X,F5.1),2(1X,I5),
+!     &    3(1X,F5.1),2(1X,F5.2),3(1X,F7.1),2(1X,I5),
+     &    3(1X,F5.1),2(1X,F5.2),3(1X,F5.1),2(1X,I5),
      &    10(1X,F5.3),10(1X,F5.1))
 
       END

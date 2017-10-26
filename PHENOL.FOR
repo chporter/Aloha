@@ -127,6 +127,8 @@ C=======================================================================
 
    20 SUMDTT  = SUMDTT  + DTT
 
+      write(555,'(i7,i4,3f10.3)') yrdoy, istage, dtt, sumdtt, tempm
+
 C     7 - Preplanting
 C     8 - Planting to root initiation
 C     9 - Root initiation to first new leaf emergence
@@ -284,11 +286,6 @@ C         ABIOMS      = BIOMAS            ! Above biomass per square meter (g/m^
              YIELDB = YIELD/0.8914         ! Fresh fruit yield (lb/acre)
              STGDOY (ISTAGE) = YRDOY
           ENDIF
-
-
-          WRITE(777,'(i7,f10.2)') YRDOY, YIELD
-
-
 
         CASE (6)
           !
